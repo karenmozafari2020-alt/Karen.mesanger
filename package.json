@@ -1,0 +1,12 @@
+{
+  "name": "karen-messenger-v4-1",
+  "version": "4.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "ws": "^8.18.3"
+  }
+}
