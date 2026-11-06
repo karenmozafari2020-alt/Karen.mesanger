@@ -102,7 +102,7 @@ app.get("/api/health", async (req,res) => {
   try {
     await pool.query("SELECT 1");
     const r = await pool.query(`SELECT (SELECT COUNT(*) FROM users)::int AS users, (SELECT COUNT(*) FROM messages)::int AS messages`);
-    res.json({ ok:true, version:"4.2.0", database:true, users:r.rows[0].users, messages:r.rows[0].messages });
+    res.json({ ok:true, version:"4.3.0", database:true, users:r.rows[0].users, messages:r.rows[0].messages });
   } catch (e) { console.error("Health error:", e.message); res.status(500).json({ ok:false, database:false }); }
 });
 
@@ -244,7 +244,7 @@ wss.on("connection", ws => {
 });
 
 async function start() {
-  try { await initDatabase(); server.listen(PORT,"0.0.0.0",()=>console.log(`=== Karen Messenger V4.2 PostgreSQL ===\nListening on 0.0.0.0:${PORT}`)); }
-  catch(e) { console.error("Database startup failed:",e.message); process.exit(1); }
+  try { await initDatabase(); server.listen(PORT,"0.0.0.0",()=>console.log(`=== Karen Messenger V4.3 PostgreSQL / Supabase ===\nListening on 0.0.0.0:${PORT}`)); }
+  catch(e) { console.error("DATABASE CONNECTION FAILED:",e.message); console.error("Check DATABASE_URL: use the exact Supabase Session pooler URI (port 5432) and the database password."); process.exit(1); }
 }
 start();
